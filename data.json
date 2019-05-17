@@ -1,0 +1,128 @@
+[
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1557580691025,
+        "name": "A",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1557582770037,
+        "name": "h",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1557580464964,
+        "name": "j",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1557595947614,
+        "name": "000",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1557595981136,
+        "name": "rrr",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1557604719929,
+        "name": "Неизвестный",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1557946364204,
+        "name": "test5",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    }
+]
