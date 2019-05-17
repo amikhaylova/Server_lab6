@@ -22,8 +22,7 @@ public class TCPServer {
                  DataInputStream in = new DataInputStream(client.getInputStream());
                  ObjectInputStream ois = new ObjectInputStream(in);) {
 
-                //System.out.println("DataOutputStream created");
-                //System.out.println("DataInputStream created");
+
 
 
 
