@@ -117,6 +117,11 @@ public class TCPServer {
                     }
 
                     out.writeUTF(answerForClient);
+                    out.writeUTF(answerForClient);
+                    out.writeUTF(answerForClient);
+                    out.writeUTF(answerForClient);
+                    out.writeUTF(answerForClient);
+                    out.writeUTF(answerForClient);
                 }
 
             } catch (SocketException e) {
