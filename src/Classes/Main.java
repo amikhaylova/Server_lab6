@@ -11,7 +11,8 @@ public class Main {
             System.out.println("Пожалуйста, введите порт в виде целого положительного числа.");
             while(port < 0){
                 try{
-                    port = Integer.parseInt(sc.nextLine());
+                    String s = sc.nextLine();
+                    port = Integer.parseInt(s);
                     if (port < 0 ){
                         System.out.println("Port введен в неверном формате. Пожалуйста, введите положительное целое число.");
                     }

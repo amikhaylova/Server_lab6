@@ -124,5 +124,23 @@
             "currency": "сантик"
         },
         "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1558118828669,
+        "name": "help",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
     }
 ]
