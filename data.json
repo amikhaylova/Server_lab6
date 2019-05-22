@@ -142,5 +142,59 @@
             "currency": "сантик"
         },
         "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1558526096447,
+        "name": "jjj",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1558526350326,
+        "name": "hakhash",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
+    },
+    {
+        "mass": 6.66,
+        "timeOfCreation": 1558527095240,
+        "name": "uuuu",
+        "look": {
+            "colour": "нет цвета",
+            "type": "нет одежды"
+        },
+        "coords": {
+            "x": 0,
+            "y": 0
+        },
+        "budget": {
+            "amount": 0,
+            "currency": "сантик"
+        },
+        "status": "неопределившийся"
     }
 ]

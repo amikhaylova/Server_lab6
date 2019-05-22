@@ -1,32 +1,33 @@
 package Classes;
 
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketException;
+import java.net.*;
+import java.nio.channels.Channels;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 
 public class TCPServer {
 
     final static ShortyManager manager = new ShortyManager();
 
     class Handler implements Runnable {
-        Socket client;
+        SocketChannel client;
 
-        public Handler(Socket client) {
+        public Handler(SocketChannel client) {
             this.client = client;
         }
 
         @Override
         public void run() {
-            try (DataOutputStream out = new DataOutputStream(client.getOutputStream());
-                 DataInputStream in = new DataInputStream(client.getInputStream());
+            try (DataOutputStream out = new DataOutputStream(Channels.newOutputStream(client));
+                 DataInputStream in = new DataInputStream(Channels.newInputStream(client));
                  ObjectInputStream ois = new ObjectInputStream(in);) {
 
 
 
 
 
-                while (!client.isClosed()) {
+                while (client.isConnected()) {
 
                     String command = "";
 
@@ -61,7 +62,7 @@ public class TCPServer {
                     if (command.trim().equals("add") || command.trim().equals("add_if_min") || command.trim().equals("remove")) {
 
                         shorty = (Shorty) ois.readObject();
-                        System.out.println(shorty);
+                        //System.out.println(shorty);
                     }
 
                     String answerForClient = "Отсутствие ответа - тоже ответ.";
@@ -120,10 +121,18 @@ public class TCPServer {
                         }
                     }
 
-                    out.writeUTF(answerForClient);
+                    try{
+                        out.writeUTF(answerForClient);
+                    }catch(IOException e){
+                        System.out.println("Произошла ошибка: " + e.getMessage() + ".");
+                    }
                 }
 
-            } catch (SocketException e) {
+            } catch (EOFException e) {
+                System.out.println("Произошла ошибка: " + e.getMessage() + ".");
+                //e.printStackTrace();
+
+            } catch (IOException e) {
                 System.out.println("Клиент отключился от сервера: " + e.getMessage() + ".");
                 if (System.getenv("FILE_PATH") != null) {
                     File file = new File(System.getenv("FILE_PATH"));
@@ -142,27 +151,27 @@ public class TCPServer {
                         System.out.println("Коллекция не сохранена");
                     }
                 }
-            } catch (EOFException e) {
-                System.out.println("Произошла ошибка: " + e.getMessage() + ".");
-                //e.printStackTrace();
-
-            } catch (ClassNotFoundException e) {
-                System.out.println("Произошла ошибка: " + e.getMessage() + ".");
-                //e.printStackTrace();
-
-
-            } catch (IOException e) {
+            }   catch (ClassNotFoundException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage() + ".");
                 //e.printStackTrace();
             }
+
+            /*} catch (IOException e) {
+                System.out.println("Произошла ошибка: " + e.getMessage() + ".");
+                //e.printStackTrace();
+            }*/
         }
     }
 
     public void start() {
 
-        try (ServerSocket server = new ServerSocket(Main.port)) {
+        ServerSocketChannel server;
+
+        try {
+            server = ServerSocketChannel.open();
+            server.bind(new InetSocketAddress(Main.port));
             while (true) {
-                Socket client = server.accept();
+                SocketChannel client = server.accept();
                 System.out.println("Соединение с клиентом установлено.");
                 Thread thread = new Thread(new Handler(client));
                 thread.start();
