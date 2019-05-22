@@ -33,11 +33,7 @@ public class TCPServer {
 
                     try {
                         command = in.readUTF();
-                        command = in.readUTF();
-                        command = in.readUTF();
-                        command = in.readUTF();
-                        command = in.readUTF();
-                        command = in.readUTF();
+                        
                     } catch (EOFException e) {
                         System.out.println("Клиент вышел в окно, прощай, клиент!");
                         File file;
