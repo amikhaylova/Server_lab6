@@ -1,8 +1,8 @@
 [
     {
         "mass": 6.66,
-        "timeOfCreation": 1557580691025,
-        "name": "A",
+        "timeOfCreation": "2019-06-09T23:24:36",
+        "name": "alena",
         "look": {
             "colour": "нет цвета",
             "type": "нет одежды"
@@ -19,79 +19,7 @@
     },
     {
         "mass": 6.66,
-        "timeOfCreation": 1557582770037,
-        "name": "h",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1557580464964,
-        "name": "j",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1557595947614,
-        "name": "000",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1557595981136,
-        "name": "rrr",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1557604719929,
+        "timeOfCreation": "2019-06-10T02:11:07.207",
         "name": "Неизвестный",
         "look": {
             "colour": "нет цвета",
@@ -109,80 +37,8 @@
     },
     {
         "mass": 6.66,
-        "timeOfCreation": 1557946364204,
-        "name": "test5",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1558118828669,
-        "name": "help",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1558526096447,
-        "name": "jjj",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1558526350326,
-        "name": "hakhash",
-        "look": {
-            "colour": "нет цвета",
-            "type": "нет одежды"
-        },
-        "coords": {
-            "x": 0,
-            "y": 0
-        },
-        "budget": {
-            "amount": 0,
-            "currency": "сантик"
-        },
-        "status": "неопределившийся"
-    },
-    {
-        "mass": 6.66,
-        "timeOfCreation": 1558527095240,
-        "name": "uuuu",
+        "timeOfCreation": "2019-06-10T02:11:59.552",
+        "name": "000",
         "look": {
             "colour": "нет цвета",
             "type": "нет одежды"

@@ -4,6 +4,8 @@
     <root id="archive" name="Server.jar">
       <element id="module-output" name="Server" />
       <element id="extracted-dir" path="$PROJECT_DIR$/.idea/lib/json-20180813.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/postgresql-42.2.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Desktop/javamail-1.4.7/mail.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

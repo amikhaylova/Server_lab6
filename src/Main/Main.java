@@ -1,10 +1,23 @@
-package Classes;
+package Main;
 
-import java.io.File;
+import DB.DataBase;
+import Server.TCPServer;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
-    static int port = -1;
+
+   /* static int port = -1;
+
+    public static void main(String[] args) {
+        MailSender sender = new MailSender();
+        sender.send("Тестовая попытка", "Ккажется, получилось! :)", "mialana1999@gmail.com");
+    }*/
+    public static  int port = -1;
+    public static Connection connection = null;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         if (args.length != 1){
@@ -47,7 +60,12 @@ public class Main {
 
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
-                if (System.getenv("FILE_PATH") != null) {
+                try{
+                    connection.close();
+                }catch (SQLException e) {
+                    System.out.println("Произошла ошибка: " + e.getMessage());
+                }
+               /* if (System.getenv("FILE_PATH") != null) {
                     File file = new File(System.getenv("FILE_PATH"));
 
                     synchronized (TCPServer.manager) {
@@ -68,11 +86,15 @@ public class Main {
                     } else {
                         System.out.println("Коллекция не сохранена");
                     }
-                }
+                }*/
             }
         });
+
         System.out.println("Я запустился!!!");
-        TCPServer server = new TCPServer();
+        DataBase db = new DataBase();
+        connection = db.connect();
+        TCPServer server = new TCPServer(db.create_tables(), connection);
+
         server.start();
     }
 }
