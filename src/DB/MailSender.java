@@ -15,16 +15,13 @@ public class MailSender {
         System.out.println("Идет отправка сообщения.");
 
         java.util.Properties props = new java.util.Properties();
+
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", port);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.timeout", "5000");
         props.put("mail.smtp.connectiontimeout", "5000");
-        props.put("mail.smtp.socketFactory.port", port);
-        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-
-
 
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             @Override
