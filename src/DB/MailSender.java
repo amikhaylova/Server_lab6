@@ -34,8 +34,6 @@ public class MailSender {
 
 // Конструируем сообщение
 
-
-
         Message msg = new MimeMessage(session);
 
         try {
@@ -46,16 +44,11 @@ public class MailSender {
             msg.setText(message);
 
 // Отправляем сообщение
-
-
             Transport.send(msg);
             System.out.println("Сообщение отправлено!");
 
         }catch (AuthenticationFailedException e){
             System.out.println("Возникла ошибка: " + e.getMessage());
         }
-        /*catch (javax.mail.MessagingException e) {
-            System.out.println("Возникла ошибка: " + e.getMessage());
-        }*/
     }
 }
