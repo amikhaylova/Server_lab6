@@ -1,7 +1,7 @@
 package Server;
 
 import DB.DataBaseManager;
-import DB.MailSender;
+import Mail.MailSender;
 import DB.PasswordGenerator;
 import DB.UsersManager;
 import Main.Main;
