@@ -93,8 +93,7 @@ public class Main {
         System.out.println("Я запустился!!!");
         DataBase db = new DataBase();
         connection = db.connect();
-        TCPServer server = new TCPServer(db.create_tables(), connection);
-
+        TCPServer server = new TCPServer(db.create_tables(), db.getColors(),connection);
         server.start();
     }
 }

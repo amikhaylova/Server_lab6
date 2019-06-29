@@ -11,20 +11,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UsersManager {
+
     private Map<String, String> users = new HashMap<>();
+    public static Map<String, String> colors = new HashMap<>();
     Connection connection;
 
-    public UsersManager (ResultSet set, Connection connection){
+    public UsersManager (ResultSet set1,ResultSet set2, Connection connection){
         this.connection = connection;
 
         String login;
         String password;
+        String color;
 
         try{
-            while(set.next()){
-                login = set.getString(1);
-                password = set.getString(2);
+            while(set1.next()){
+                login = set1.getString(1);
+                password = set1.getString(2);
                 users.put(login,password);
+            }
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            while(set2.next()){
+                login = set2.getString(1);
+                color = set2.getString(2);
+                colors.put(login,color);
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -41,6 +54,10 @@ public class UsersManager {
         password = to_SHA1(password);
         users.put(login,password);
         TCPServer.dataBaseManager.add_user(login, password);
+    }
+    public synchronized void addNewColor (String login, String color) throws SQLException{
+        colors.put(login,color);
+        TCPServer.dataBaseManager.add_color(login, color);
     }
 
     public synchronized boolean checkPassword (String login, String password){

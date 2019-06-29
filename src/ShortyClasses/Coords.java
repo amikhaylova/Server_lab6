@@ -25,7 +25,8 @@ public class Coords implements Serializable {
     }
 
     public String toString() {
-        return ("x: " + this.x + ". y: " + this.y + ".");
+        //return ("x: " + this.x + ". y: " + this.y + ".");
+        return ("(" + this.x + ";" + this.y + ")");
     }
 
     @Override

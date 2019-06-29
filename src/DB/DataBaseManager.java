@@ -108,4 +108,17 @@ public class DataBaseManager {
 
         prep.closeOnCompletion();
     }
+
+    public synchronized void add_color (String login, String color) throws SQLException{
+        String add_to_Shorty_colors = "INSERT into ShortyColors(user_login, color)  VALUES (?, ?)";
+        PreparedStatement prep  = connection.prepareStatement(add_to_Shorty_colors);
+
+        prep.setString(1, login);
+        prep.setString(2, color);
+
+        prep.executeUpdate();
+
+        prep.closeOnCompletion();
+    }
+
 }

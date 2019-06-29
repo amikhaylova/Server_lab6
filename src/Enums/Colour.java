@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Colour {
-    Blue("голубой"), Green("зеленый"), Yellow("желтый"), Red("красный"), Black("черный"), White("белый"), Leopard("леопардовый"), None ("нет цвета");
+    Blue("голубой"), Green("зеленый"),  Red("красный"), Black("черный"),  None ("нет цвета");
 
     private String name;
 

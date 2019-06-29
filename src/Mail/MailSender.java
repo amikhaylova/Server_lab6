@@ -1,4 +1,4 @@
-package DB;
+package Mail;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -22,6 +22,7 @@ public class MailSender {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.timeout", "5000");
         props.put("mail.smtp.connectiontimeout", "5000");
+
 
         Session session = Session.getDefaultInstance(props, new Authenticator() {
             @Override

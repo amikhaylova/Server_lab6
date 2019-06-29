@@ -95,7 +95,8 @@ public class Money extends PhysicalObject implements Comparable<Money>, Serializ
 
     @Override
     public String toString() {
-        return ("Валюта: " + currency.getLocalizedName() + ". Количество: " + amount + ".");
+        //return ("Валюта: " + currency.getLocalizedName() + ". Количество: " + amount + ".");
+        return (amount + " " + currency.getLocalizedName());
     }
 
     @Override

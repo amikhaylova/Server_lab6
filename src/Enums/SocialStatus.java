@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum SocialStatus {
-    Deadbeat("тунеядец"), Policeman("полицейский"), Prisoner("зэк"), Artist("художник"), Doctor("доктор"), Vtshnik("втшник"), None("неопределившийся"), Musician("музыкант");
+    Deadbeat("тунеядец"), Policeman("полицейский"), Prisoner("зэк"), Artist("художник"), Doctor("доктор"), Vtshnik("втшник"), None("неопределившийся");
 
     private String name;
 
@@ -32,5 +32,10 @@ public enum SocialStatus {
         } else {
             return lookup.get(name);
         }
+    }
+
+    @Override
+    public String toString() {
+        return this.getLocalizedName();
     }
 }

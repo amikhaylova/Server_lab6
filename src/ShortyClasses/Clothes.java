@@ -47,14 +47,6 @@ public class Clothes extends PhysicalObject implements Serializable {
             mass = HAT_MASS;
         } else if (this.type == ClothesTypes.Jeans) {
             mass = JEANS_MASS;
-        } else if (this.type == ClothesTypes.Leggings) {
-            mass = LEGGINGS_MASS;
-        } else if (this.type == ClothesTypes.Skirt) {
-            mass = SKIRT_MASS;
-        } else if (this.type == ClothesTypes.Socks) {
-            mass = SOCKS_MASS;
-        } else if (this.type == ClothesTypes.Sweatshirt) {
-            mass = SWEATSHIRT_MASS;
         } else if (this.type == ClothesTypes.Tshirt) {
             mass = TSHIRT_MASS;
         }
@@ -80,7 +72,8 @@ public class Clothes extends PhysicalObject implements Serializable {
 
     @Override
     public String toString() {
-        return ("Тип одежды: " + type.getLocalizedName() + ". Цвет одежды: " + colour.getLocalizedName() + ".");
+        //return ("Тип одежды: " + type.getLocalizedName() + ". Цвет одежды: " + colour.getLocalizedName() + ".");
+        return (colour.getLocalizedName() + " " + type.getLocalizedName());
     }
 
     @Override

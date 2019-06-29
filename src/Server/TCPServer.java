@@ -1,7 +1,7 @@
 package Server;
 
 import DB.DataBaseManager;
-import DB.MailSender;
+import Mail.MailSender;
 import DB.PasswordGenerator;
 import DB.UsersManager;
 import Main.Main;
@@ -25,20 +25,23 @@ public class TCPServer {
     ShortyManager manager;
     UsersManager usersManager;
     public static DataBaseManager dataBaseManager;
-    ResultSet set = null;
+    ResultSet set1 = null;
+    ResultSet set2 = null;
 
 
-    public TCPServer(ResultSet set, Connection connection){
-        this.set = set;
+    public TCPServer(ResultSet set1, ResultSet set2, Connection connection){
+        this.set1 = set1;
+        this.set2 = set2;
         this.connection = connection;
     }
 
     class Handler implements Runnable {
-        SocketChannel client;
+        Socket client;
         String user_login;
+        String user_color;
         String email;
 
-        public Handler(SocketChannel client) {
+        public Handler(Socket client) {
             this.client = client;
         }
 
@@ -53,15 +56,15 @@ public class TCPServer {
             return string;
         }
 
-        String authorize(DataInputStream in, DataOutputStream out) throws IOException{
+        String authorize(DataInputStream in, DataOutputStream out, ObjectOutputStream oos) throws IOException{
             String login = "";
             String password = "";
             String action = "";
             boolean correct = false;
 
-            Map<String, String> map = new HashMap<>();
+           /* Map<String, String> map = new HashMap<>();
             map.put("login1","pas1");
-            map.put("login2","pas2");
+            map.put("login2","pas2");*/
 
             PasswordGenerator passwordGenerator = new PasswordGenerator.PasswordGeneratorBuilder()
                     .useDigits(true)
@@ -73,13 +76,17 @@ public class TCPServer {
 
             while (!correct){
                     action = read(in);
+                    System.out.println("Считал действие");
                     if (action.equals("registration")){
                         login = read(in);
+                        password = read(in);
                         email = read(in);
+                        user_color = read(in);
+
                         if (!usersManager.ifContainLogin(login)){
-                            password = passwordGenerator.generate(7);
                             try{
-                                sender.send("Пароль для входа в очень полезное приложение", "Ваш пароль: "+ password, email);
+                                usersManager.addNewColor(login,user_color);
+                                sender.send("Данные входа в очень полезное приложение", "Ваш пароль: "+ password + "\n" + "Ваш логин: " + login , email);
                                 usersManager.addNewUser(login,password);
                                 System.out.println("Новое значение добавлено в мап.");
                                 out.writeUTF("Регистрация прошла успешно");
@@ -93,7 +100,7 @@ public class TCPServer {
                                     System.out.println("Произошла ошибка при добалении пользователя: " + e.getMessage());
                                 }
                                 System.out.println("Новое значение добавлено в мап.");
-                                out.writeUTF("Что-то пошло не так с регистрацией и мы не смогли отправить вам письмо. Но вот ваш пароль: " + password);
+                                out.writeUTF("Не отправлено");
 
                             }
 
@@ -102,17 +109,25 @@ public class TCPServer {
                         }
                     }else if (action.equals("authorization")){
                         login = read(in);
+                        System.out.println("Считал логин");
                         if(usersManager.ifContainLogin(login)){
                             out.writeUTF("1");
+                            System.out.println("Записал 1");
                             password = read(in);
                             if(usersManager.checkPassword(login, password)){
                                 out.writeUTF("Авторизация прошла успешно");
+                                System.out.println("Записал успешность");
                                 correct = true;
+                                oos.writeObject(manager.shortyVector);
+                                oos.writeObject(UsersManager.colors);
+
                             }else{
                                 out.writeUTF("Введенный пароль неверен");
+                                System.out.println("Записал неверный пароль");
                             }
                         }else{
-                            out.writeUTF("Данного логина не существует.");
+                            out.writeUTF("Данного логина не существует");
+                            System.out.println("Записал логина не существует");
                         }
 
                     }
@@ -126,11 +141,12 @@ public class TCPServer {
 
         @Override
         public void run() {
-            try (DataOutputStream out = new DataOutputStream(Channels.newOutputStream(client));
-                 DataInputStream in = new DataInputStream(Channels.newInputStream(client));
-                 ObjectInputStream ois = new ObjectInputStream(in);) {
+            try (DataOutputStream out = new DataOutputStream(client.getOutputStream());
+                 DataInputStream in = new DataInputStream(client.getInputStream());
+                 ObjectInputStream ois = new ObjectInputStream(in);
+                 ObjectOutputStream oos = new ObjectOutputStream(out)) {
 
-                user_login = authorize(in, out);
+                user_login = authorize(in, out, oos);
 
                 while (client.isConnected()) {
 
@@ -138,6 +154,7 @@ public class TCPServer {
 
                     try {
                         command = read(in);
+                        System.out.println("Считал команду " + command);
                         
                     } catch (EOFException e) {
                         System.out.println("Клиент вышел в окно, прощай, клиент!");
@@ -163,7 +180,8 @@ public class TCPServer {
                     if (command.trim().equals("add") || command.trim().equals("add_if_min") || command.trim().equals("remove")) {
 
                         shorty = (Shorty) ois.readObject();
-                        //System.out.println(shorty);
+                        System.out.println(shorty);
+                        System.out.println(shorty.getUser_login());
                     }
 
                     String answerForClient = "Отсутствие ответа - тоже ответ.";
@@ -175,7 +193,7 @@ public class TCPServer {
                                 int id = manager.remove_first(user_login);
                                 if (id>0) {
                                     dataBaseManager.remove(id);
-                                    answerForClient = "Коротышка удален из базы данных";
+                                    answerForClient = "Первый коротышка удален из базы данных";
                                 }else if (id == -10){
                                     answerForClient = "Коротышка не удален из базы данных, потому что там пусто.";
                                 }else{
@@ -211,7 +229,7 @@ public class TCPServer {
                                             answerForClient = "Коротышка не был удален, так как его нет в базе данных.";
                                         } else {
                                             dataBaseManager.remove(id1);
-                                            answerForClient = "Коротышка удален из базы данных.";
+                                            answerForClient = "Коротышка удален из базы данных";
                                         }
                                     }else{
                                         answerForClient = "Команда не выполнена, так как такого коротышки нет в коллекции.";
@@ -256,14 +274,16 @@ public class TCPServer {
 
                     try{
                         out.writeUTF(answerForClient);
+                        System.out.println("Записал ответ для клиента");
                     }catch(IOException e){
                         System.out.println("Произошла ошибка: " + e.getMessage() + ".");
+                        e.printStackTrace();
                     }
                 }
 
             } catch (EOFException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage() + ".");
-                //e.printStackTrace();
+                e.printStackTrace();
 
             } catch (IOException e) {
                 System.out.println("Клиент отключился от сервера: " + e.getMessage() + ".");
@@ -286,7 +306,7 @@ public class TCPServer {
                 }*/
             }   catch (ClassNotFoundException e) {
                 System.out.println("Произошла ошибка: " + e.getMessage() + ".");
-                //e.printStackTrace();
+                e.printStackTrace();
             } catch (SQLException e){
                 e.printStackTrace();
                 System.out.println("Произошла ошибка: " + e.getMessage() + "." + e.getSQLState());
@@ -296,24 +316,22 @@ public class TCPServer {
 
     public void start() {
 
-        ServerSocketChannel server;
 
         this.manager = new ShortyManager(connection);
-        this.usersManager = new UsersManager(set, connection);
+        this.usersManager = new UsersManager(set1,set2, connection);
         this.dataBaseManager = new DataBaseManager(connection);
 
-        try {
-            server = ServerSocketChannel.open();
-            server.bind(new InetSocketAddress(Main.port));
+        try (ServerSocket server = new ServerSocket(Main.port)){
             while (true) {
-                SocketChannel client = server.accept();
+                Socket client = server.accept();
                 System.out.println("Соединение с клиентом установлено.");
                 Thread thread = new Thread(new Handler(client));
+                System.out.println("Я тут!");
                 thread.start();
             }
         } catch (IOException e) {
             System.out.println("Произошла ошибка: " + e.getMessage() + ".");
-            //e.printStackTrace();
-        }
+            e.printStackTrace();
+    }
     }
 }

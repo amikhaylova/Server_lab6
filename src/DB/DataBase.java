@@ -5,13 +5,13 @@ import java.sql.*;
 public class DataBase {
     Connection connection = null;
     //  Database credentials
-    /*static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
+    static final String DB_URL = "jdbc:postgresql://localhost:5432/postgres";
     static final String USER = "postgres";
-    static final String PASS = "rfrrhfjct";*/
+    static final String PASS = "rfrrhfjct";
 
-    static final String DB_URL = "jdbc:postgresql://pg/studs";
+    /*static final String DB_URL = "jdbc:postgresql://pg/studs";
     static final String USER = "s264446";
-    static final String PASS = "lly481";
+    static final String PASS = "lly481";*/
 
     public Connection connect(){
         System.out.println("Пытыюсь подключиться к PostgreSQL JDBC");
@@ -58,6 +58,7 @@ public class DataBase {
                 "CREATE TABLE IF NOT EXISTS ClothesType(type_id INT PRIMARY KEY, type VARCHAR);",
                 "CREATE TABLE IF NOT EXISTS Coords(shorty_id INT PRIMARY KEY, x INT, y INT);",
                 "CREATE TABLE IF NOT EXISTS ShortyUsers(user_login VARCHAR PRIMARY KEY, password VARCHAR);",
+                "CREATE TABLE IF NOT EXISTS ShortyColors(user_login VARCHAR PRIMARY KEY, color VARCHAR);",
                 "INSERT INTO Currency VALUES (0, 'сантик') ON CONFLICT DO NOTHING;",
                 "INSERT INTO Currency VALUES (1, 'рубль') ON CONFLICT DO NOTHING;",
                 "INSERT INTO Currency VALUES (2, 'доллар') ON CONFLICT DO NOTHING;",
@@ -90,14 +91,17 @@ public class DataBase {
 
         String command2 = "SELECT * FROM ShortyUsers;";
 
+
+
         Statement statement1 = null;
         Statement statement2 = null;
 
 
+
         try{
             statement1 = connection.createStatement();
-
             statement2 = connection.createStatement();
+
 
             for (int i = 0; i< request_array.length; i++){
                 statement1.executeUpdate(request_array[i]);
@@ -105,6 +109,8 @@ public class DataBase {
 
             //set[0] = statement1.executeQuery(command1);
             set = statement2.executeQuery(command2);
+
+
 
 
             System.out.println("Таблицы созданы и заполнены.");
@@ -115,5 +121,18 @@ public class DataBase {
 
         return set;
 
+    }
+
+    public ResultSet getColors(){
+        ResultSet set = null;
+        String command = "SELECT * FROM ShortyColors;";
+        Statement statement = null;
+        try {
+            statement = connection.createStatement();
+            set = statement.executeQuery(command);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return set;
     }
 }

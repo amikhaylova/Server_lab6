@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum ClothesTypes {
-    Hat("шляпа"), Leggings("лосины"), Tshirt("футболка"), Jeans("джинсы"), Socks("носки"), Sweatshirt("свитшот"), Skirt("юбка"), None("нет одежды");
+    Hat("шляпа"), Tshirt("футболка"), Jeans("джинсы"), None("нет одежды");
 
     private String name;
 
