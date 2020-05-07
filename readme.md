@@ -1,5 +1,3 @@
-# Lab 06
-
-It is my lab, which, i hope, works ^^
+# Lab 08
 
 *We here just to suffer*
